@@ -10,7 +10,6 @@ var defsify = require('browserify-defs');
 var es6ify = require('es6ify');
 var mainBowerFiles = require('main-bower-files');
 var ngAnnotatify = require('browserify-ngannotate');
-var opn = require('opn');
 var source = require('vinyl-source-stream');
 var wiredep = require('wiredep');
 
