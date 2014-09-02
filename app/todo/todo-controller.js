@@ -4,6 +4,14 @@ class TodoController {
 
     this.newTodo = '';
     this.editedTodo = null;
+    this.originalTodo = null;
+
+    this.remainingCount = 0;
+    this.completedCount = 0;
+    this.allChecked = true;
+
+    this.status = '';
+    this.statusFilter = null;
 
     $scope.$watch(() => this.todos, (newValue, oldValue) => {
       this.remainingCount = this.todos.filter((todo) => !todo.completed).length;
