@@ -5,12 +5,12 @@ angular.module('app', ['ngRoute', 'app.todo'])
     $routeProvider
       .when('/', {
         controller: 'TodoController',
-        controllerAs: 'controller',
+        controllerAs: 'ctrl',
         templateUrl: 'todo/todo.html'
       })
       .when('/:status', {
         controller: 'TodoController',
-        controllerAs: 'controller',
+        controllerAs: 'ctrl',
         templateUrl: 'todo/todo.html'
       })
       .otherwise({ redirectTo: '/' });

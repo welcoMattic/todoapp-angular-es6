@@ -1,52 +1,50 @@
 class TodoController {
   constructor($routeParams, $scope, TodoStorageService) {
-    this.$scope = $scope;
+    this.todos = TodoStorageService.get();
 
-    $scope.todos = TodoStorageService.get();
+    this.newTodo = '';
+    this.editedTodo = null;
 
-    $scope.newTodo = '';
-    $scope.editedTodo = null;
-
-    $scope.$watch('todos', (newValue, oldValue) => {
-      $scope.remainingCount = $scope.todos.filter((todo) => !todo.completed).length;
-      $scope.completedCount = $scope.todos.length - $scope.remainingCount;
-      $scope.allChecked = !$scope.remainingCount;
+    $scope.$watch(() => this.todos, (newValue, oldValue) => {
+      this.remainingCount = this.todos.filter((todo) => !todo.completed).length;
+      this.completedCount = this.todos.length - this.remainingCount;
+      this.allChecked = !this.remainingCount;
 
       if (newValue !== oldValue) {
-        TodoStorageService.put($scope.todos);
+        TodoStorageService.put(this.todos);
       }
     }, true);
 
     $scope.$on('$routeChangeSuccess', () => {
-      let status = this.$scope.status = $routeParams.status || '';
+      let status = this.status = $routeParams.status || '';
 
       if (status === 'active') {
-        this.$scope.statusFilter = { completed: false };
+        this.statusFilter = { completed: false };
       } else if (status === 'completed') {
-        this.$scope.statusFilter = { completed: true };
+        this.statusFilter = { completed: true };
       } else {
-        this.$scope.statusFilter = null;
+        this.statusFilter = null;
       }
     });
   }
 
   addTodo() {
-    let newTodo = this.$scope.newTodo.trim();
+    let newTodo = this.newTodo.trim();
 
     if (!newTodo.length) return;
 
-    this.$scope.todos.unshift({ title: newTodo, completed: false });
+    this.todos.unshift({ title: newTodo, completed: false });
 
-    this.$scope.newTodo = '';
+    this.newTodo = '';
   }
 
   editTodo(todo) {
-    this.$scope.editedTodo = todo;
-    this.$scope.originalTodo = Object.assign({}, todo);
+    this.editedTodo = todo;
+    this.originalTodo = Object.assign({}, todo);
   }
 
   doneEditing(todo) {
-    this.$scope.editedTodo = null;
+    this.editedTodo = null;
     todo.title = todo.title.trim();
 
     if (!todo.title) {
@@ -55,20 +53,20 @@ class TodoController {
   }
 
   revertEditing(todo) {
-    this.$scope.todos[this.$scope.todos.indexOf(todo)] = this.$scope.originalTodo;
-    this.doneEditing(this.$scope.originalTodo);
+    this.todos[this.todos.indexOf(todo)] = this.originalTodo;
+    this.doneEditing(this.originalTodo);
   }
 
   removeTodo(todo) {
-    this.$scope.todos.splice(this.$scope.todos.indexOf(todo), 1);
+    this.todos.splice(this.todos.indexOf(todo), 1);
   }
 
   clearCompletedTodos() {
-    this.$scope.todos = this.$scope.todos.filter((todo) => !todo.completed);
+    this.todos = this.todos.filter((todo) => !todo.completed);
   }
 
   markAll(completed) {
-    for (let todo of this.$scope.todos) {
+    for (let todo of this.todos) {
       todo.completed = !completed;
     }
   }
