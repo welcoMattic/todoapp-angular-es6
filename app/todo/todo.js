@@ -1,12 +1,12 @@
 import '../components/todo-storage-service/todo-storage-service';
-import '../components/escape-directive/escape-directive';
-import '../components/focus-directive/focus-directive';
+import '../components/todo-escape-directive/todo-escape-directive';
+import '../components/todo-focus-directive/todo-focus-directive';
 
 import TodoController from './todo-controller';
 
 export default angular.module('app.todo', [
     'app.todo-storage-service',
-    'app.escape-directive',
-    'app.focus-directive'
+    'app.todo-escape-directive',
+    'app.todo-focus-directive'
   ])
   .controller('TodoController', TodoController);

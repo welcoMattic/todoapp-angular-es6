@@ -12,5 +12,5 @@ class FocusDirective {
   }
 }
 
-export default angular.module('app.focus-directive', [])
-  .directive('focus', ($injector) => $injector.instantiate(FocusDirective));
+export default angular.module('app.todo-focus-directive', [])
+  .directive('todo-focus', ($injector) => $injector.instantiate(FocusDirective));
