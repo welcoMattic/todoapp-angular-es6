@@ -22,6 +22,12 @@
   "dependencies": {
     "angular": "~1.2.23",
     "traceur-runtime": "0.0.55",
-    "angular-route": "1.2.23"
+    "angular-route": "1.2.23",
+    "todomvc-common": "~0.1.9"
+  },
+  "overrides": {
+    "todomvc-common": {
+      "main": ["base.css", "bg.png"]
+    }
   }
 }
