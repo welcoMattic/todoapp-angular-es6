@@ -29,6 +29,7 @@
     "gulp-concat": "^2.3.4",
     "gulp-csso": "^0.2.9",
     "gulp-filter": "^1.0.0",
+    "gulp-gh-pages": "^0.3.3",
     "gulp-htmlmin": "^0.2.0",
     "gulp-ignore": "^1.2.0",
     "gulp-inject": "^1.0.1",
