@@ -31,7 +31,8 @@ function clean() {
 function lint() {
   return gulp.src('app/**/*.js')
     .pipe(plugins.cache(plugins.jshint()))
-    .pipe(plugins.jshint.reporter('jshint-stylish'));
+    .pipe(plugins.jshint.reporter('jshint-stylish'))
+    .pipe(plugins.jshint.reporter('fail'));
 }
 
 function cleanScripts() {
