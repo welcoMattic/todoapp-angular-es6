@@ -169,6 +169,7 @@ function serve() {
 
   return gulp.src(sources)
     .pipe(plugins.webserver({
+      host: argv.host,
       port: argv.port || 3000,
       livereload: true,
       open: true
