@@ -175,6 +175,11 @@ function serve() {
     }));
 }
 
+function deploy() {
+  return gulp.src('dist/**/*')
+    .pipe(plugins.ghPages({ push: false }));
+}
+
 gulp.task('clean', clean);
 
 gulp.task('lint', lint);
@@ -206,3 +211,5 @@ gulp.task('watch', watch);
 gulp.task('serve', bach.parallel(watch, serve));
 
 gulp.task('default', bach.series(build, bach.parallel(watch, serve)));
+
+gulp.task('deploy', deploy);
