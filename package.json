@@ -1,6 +1,6 @@
 {
   "name": "todoapp-angular-es6",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Concevoir un build-system qui fait du bon café.",
   "main": "app/app.js",
   "scripts": {
