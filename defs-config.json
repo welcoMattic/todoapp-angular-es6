@@ -1,6 +1,0 @@
-{
-    "loopClosures": "iife",
-    "disallowVars": false,
-    "disallowDuplicated": true,
-    "disallowUnknownReferences": false
-}

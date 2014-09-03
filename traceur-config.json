@@ -1,5 +1,0 @@
-{
-  "sourceMaps": true,
-  "modules": "commonjs",
-  "blockBinding": "parse"
-}
