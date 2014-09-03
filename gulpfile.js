@@ -9,6 +9,7 @@ var browserify = require('browserify');
 var defsify = require('browserify-defs');
 var es6ify = require('es6ify');
 var mainBowerFiles = require('main-bower-files');
+var minimist = require('minimist');
 var ngAnnotatify = require('browserify-ngannotate');
 var source = require('vinyl-source-stream');
 var watchify = require('watchify');
@@ -163,9 +164,12 @@ function watch() {
 }
 
 function serve() {
-  return gulp.src(['.tmp', 'bower_components'])
+  var argv = minimist(process.argv.slice(2));
+  var sources = argv.production ? 'dist': ['.tmp', 'bower_components'];
+
+  return gulp.src(sources)
     .pipe(plugins.webserver({
-      port: process.env.PORT || 3000,
+      port: argv.port || 3000,
       livereload: true,
       open: true
     }));
