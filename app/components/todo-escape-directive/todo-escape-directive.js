@@ -1,6 +1,10 @@
 const ESCAPE_KEY_CODE = 27;
 
 class EscapeDirective {
+  constructor() {
+    this.restrict = 'A';
+  }
+
   link(scope, element, attrs) {
     element.on('keydown', (event) => {
       if (event.keyCode === ESCAPE_KEY_CODE) {
