@@ -34,7 +34,6 @@
     "gulp-inject": "^1.0.1",
     "gulp-jshint": "^1.8.4",
     "gulp-load-plugins": "^0.6.0",
-    "gulp-plumber": "^0.6.5",
     "gulp-rimraf": "^0.1.0",
     "gulp-size": "^1.1.0",
     "gulp-sourcemaps": "^1.1.4",
