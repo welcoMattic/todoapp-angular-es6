@@ -11,6 +11,7 @@ var es6ify = require('es6ify');
 var mainBowerFiles = require('main-bower-files');
 var ngAnnotatify = require('browserify-ngannotate');
 var source = require('vinyl-source-stream');
+var watchify = require('watchify');
 var wiredep = require('wiredep');
 
 var gulp = require('gulp');
@@ -39,16 +40,25 @@ function cleanScripts() {
 }
 
 function scripts() {
+   return bundle(transform(browserify({ debug: true })));
+}
+
+function transform(bundler) {
   var traceurOptions = require('./traceur-config.json');
 
   Object.assign(es6ify.traceurOverrides, traceurOptions);
 
-  return browserify({ debug: true })
+  return bundler
     .add('./app/app.js')
     .transform(es6ify)
     .transform(defsify)
-    .transform(ngAnnotatify)
-    .bundle()
+    .transform(ngAnnotatify);
+}
+
+function bundle(bundler) {
+  var scriptsFilter = plugins.filter('*.js');
+
+  return bundler.bundle()
     .pipe(source('app.js'))
     .pipe(plugins.buffer())
     .pipe(plugins.sourcemaps.init({ loadMaps: true }))
@@ -134,9 +144,30 @@ function size(pattern) {
     .pipe(plugins.size());
 }
 
+function watch() {
+  var options = Object.assign({ debug: true }, watchify.args);
+
+  var bundler = transform(watchify(browserify(options)))
+    .on('update', function () {
+      var rebundle = bach.series(lint, cleanScripts, function () {
+        return bundle(bundler);
+      });
+
+      rebundle(function (err) {
+        if (err) plugins.util.log(err.stack);
+      });
+    });
+
+  bundler.bundle();
+}
+
 function serve() {
   return gulp.src(['.tmp', 'bower_components'])
-    .pipe(plugins.webserver({ port: process.env.PORT || 3000, open: true }));
+    .pipe(plugins.webserver({
+      port: process.env.PORT || 3000,
+      livereload: true,
+      open: true
+    }));
 }
 
 gulp.task('clean', clean);
@@ -165,6 +196,8 @@ gulp.task('html', bach.series(cleanHtml, html, function () {
 
 gulp.task('build', build);
 
-gulp.task('serve', serve);
+gulp.task('watch', watch);
 
-gulp.task('default', bach.series(build, serve));
+gulp.task('serve', bach.parallel(watch, serve));
+
+gulp.task('default', bach.series(build, bach.parallel(watch, serve)));
