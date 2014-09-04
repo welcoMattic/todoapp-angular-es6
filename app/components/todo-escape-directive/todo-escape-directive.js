@@ -15,4 +15,4 @@ class EscapeDirective {
 }
 
 export default angular.module('app.todo-escape-directive', [])
-  .directive('todo-escape', ($injector) => $injector.instantiate(EscapeDirective));
+  .directive('todo-escape', () => new EscapeDirective());
