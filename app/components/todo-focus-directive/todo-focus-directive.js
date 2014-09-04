@@ -2,6 +2,7 @@ class FocusDirective {
   constructor($timeout) {
     this.$timeout = $timeout;
     this.restrict = 'A';
+    this.link = this.link.bind(this);
   }
 
   link(scope, element, attrs) {
