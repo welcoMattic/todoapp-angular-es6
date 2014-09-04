@@ -7,11 +7,13 @@ class FocusDirective {
   link(scope, element, attrs) {
     let rawElement = element[0];
 
-    scope.$watch(attrs.focus, (focused) => {
-      if (focused) this.$timeout(() => rawElement.focus(), 0);
+    scope.$watch(attrs.todoFocus, (focused) => {
+      if (focused) {
+        this.$timeout(() => rawElement.focus(), 0);
+      }
     });
   }
 }
 
 export default angular.module('app.todo-focus-directive', [])
-  .directive('todo-focus', ($injector) => $injector.instantiate(['$timeout', FocusDirective]));
+  .directive('todoFocus', ($injector) => $injector.instantiate(['$timeout', FocusDirective]));
