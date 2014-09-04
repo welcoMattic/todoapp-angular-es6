@@ -14,4 +14,4 @@ class FocusDirective {
 }
 
 export default angular.module('app.todo-focus-directive', [])
-  .directive('todo-focus', ($injector) => $injector.instantiate(FocusDirective));
+  .directive('todo-focus', ($injector) => $injector.instantiate(['$timeout', FocusDirective]));
