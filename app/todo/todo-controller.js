@@ -67,10 +67,12 @@ class TodoController {
 
   removeTodo(todo) {
     this.todos.splice(this.todos.indexOf(todo), 1);
+    console.log();
   }
 
   clearCompletedTodos() {
     this.todos = this.todos.filter((todo) => !todo.completed);
+    console.log();
   }
 
   markAll(completed) {

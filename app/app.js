@@ -1,7 +1,7 @@
 import './todo/todo';
 
 angular.module('app', ['ngRoute', 'app.todo'])
-  .config(function ($routeProvider) {
+  .config(($routeProvider) => {
     $routeProvider
       .when('/', {
         controller: 'TodoController',

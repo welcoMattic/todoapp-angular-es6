@@ -4,18 +4,18 @@ require('object.assign');
 
 var format = require('util').format;
 
-var bach = require('bach');
-var browserify = require('browserify');
-var defsify = require('browserify-defs');
-var es6ify = require('es6ify');
+var bach           = require('bach');
+var browserify     = require('browserify');
+var defsify        = require('browserify-defs');
+var es6ify         = require('es6ify');
 var mainBowerFiles = require('main-bower-files');
-var minimist = require('minimist');
-var ngAnnotatify = require('browserify-ngannotate');
-var source = require('vinyl-source-stream');
-var watchify = require('watchify');
-var wiredep = require('wiredep');
+var minimist       = require('minimist');
+var ngAnnotatify   = require('browserify-ngannotate');
+var source         = require('vinyl-source-stream');
+var watchify       = require('watchify');
+var wiredep        = require('wiredep');
 
-var gulp = require('gulp');
+var gulp    = require('gulp');
 var plugins = require('gulp-load-plugins')();
 
 var htmlminOptions = require('./htmlmin-config.json');
